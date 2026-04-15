@@ -17,17 +17,28 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+Real-world recommendation systems like Spotify use hybrid approaches combining
+collaborative filtering (finding users with similar taste) and content-based
+filtering (matching song attributes to a taste profile). This simulation
+focuses on content-based filtering — the layer that ensures recommended songs
+actually sound right for the user.
 
-Some prompts to answer:
+Our recommender scores each song against a user's taste profile using a
+weighted scoring rule:
+- Genre match: 3 points (strongest signal — defines the sonic world)
+- Mood match: 2 points (emotional intent)
+- Energy proximity: 0–1 points (rewards closeness to target energy)
+- Acoustic bonus: 1 point (if user likes acoustic and song is acoustic)
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+The ranking rule then sorts all scored songs and returns the top k results.
 
-You can include a simple diagram or bullet list if helpful.
+### Features Used
+
+**Song object:** id, title, artist, genre, mood, energy, tempo_bpm,
+valence, danceability, acousticness
+
+**UserProfile object:** favorite_genre, favorite_mood, target_energy,
+likes_acoustic
 
 ---
 
