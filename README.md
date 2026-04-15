@@ -68,6 +68,29 @@ flowchart TD
     J --> K[Return top k results\nwith explanations]
 ```
 
+## Sample Terminal Output
+
+Default profile: `genre=pop, mood=happy, energy=0.8, likes_acoustic=False`
+
+```
+Top recommendations:
+
+Sunrise City - Score: 5.98
+Because: Matches your favorite genre (pop) | Matches your preferred mood (happy) | Energy match: 0.98/1.00 (song=0.82, target=0.80)
+
+Gym Hero - Score: 3.87
+Because: Matches your favorite genre (pop) | Energy match: 0.87/1.00 (song=0.93, target=0.80)
+
+Superstition Groove - Score: 2.98
+Because: Matches your preferred mood (happy) | Energy match: 0.98/1.00 (song=0.78, target=0.80)
+
+Rooftop Lights - Score: 2.96
+Because: Matches your preferred mood (happy) | Energy match: 0.96/1.00 (song=0.76, target=0.80)
+
+Night Drive Loop - Score: 0.95
+Because: Energy match: 0.95/1.00 (song=0.75, target=0.80)
+```
+
 ## Potential Biases
 
 This system may over-prioritize genre, causing songs with matching mood
