@@ -40,6 +40,40 @@ valence, danceability, acousticness
 **UserProfile object:** favorite_genre, favorite_mood, target_energy,
 likes_acoustic
 
+## Algorithm Recipe
+
+| Feature | Points | Logic |
+|---------|--------|-------|
+| Genre match | +3 | Exact string match |
+| Mood match | +2 | Exact string match |
+| Energy proximity | 0–1 | `max(0, 1 - abs(song.energy - target))` |
+| Acoustic bonus | +1 | Only if `likes_acoustic=True` and `acousticness > 0.6` |
+
+**Max possible score: 7.0**
+
+## Data Flow
+
+```mermaid
+flowchart TD
+    A[User Profile\ngenre · mood · energy · likes_acoustic] --> C[For each song: score_song]
+    B[songs.csv\n18 songs] --> C
+    C --> D[Genre match? +3 pts]
+    D --> E[Mood match? +2 pts]
+    E --> F[Energy proximity 0–1 pts]
+    F --> G[Acoustic bonus? +1 pt]
+    G --> H[Song Score]
+    H --> I{More songs?}
+    I -- Yes --> C
+    I -- No --> J[Sort all scores descending]
+    J --> K[Return top k results\nwith explanations]
+```
+
+## Potential Biases
+
+This system may over-prioritize genre, causing songs with matching mood
+and energy but different genre to rank poorly. It also creates a filter
+bubble — a pop+happy user will only ever see pop+happy songs.
+
 ---
 
 ## Getting Started
