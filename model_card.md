@@ -12,6 +12,8 @@ VibeFinder suggests songs from a small catalog based on a user's preferred genre
 
 The system assumes each user has a single fixed taste profile. It does not learn over time, adapt to context (e.g. working out vs. studying), or consider listening history.
 
+**Non-intended use:** This system is not intended for use in production music platforms, personalization engines for real users, or any context where recommendations could influence purchasing decisions or artist revenue.
+
 ---
 
 ## 3. How the Model Works
