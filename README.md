@@ -70,25 +70,78 @@ flowchart TD
 
 ## Sample Terminal Output
 
-Default profile: `genre=pop, mood=happy, energy=0.8, likes_acoustic=False`
+Six profiles were tested, including three adversarial edge cases designed to expose scoring weaknesses.
 
+### High-Energy Pop
+`genre=pop, mood=happy, energy=0.8, likes_acoustic=False`
 ```
-Top recommendations:
-
+=== High-Energy Pop ===
 Sunrise City - Score: 5.98
-Because: Matches your favorite genre (pop) | Matches your preferred mood (happy) | Energy match: 0.98/1.00 (song=0.82, target=0.80)
-
+  Because: Matches your favorite genre (pop) | Matches your preferred mood (happy) | Energy match: 0.98/1.00 (song=0.82, target=0.80)
 Gym Hero - Score: 3.87
-Because: Matches your favorite genre (pop) | Energy match: 0.87/1.00 (song=0.93, target=0.80)
-
+  Because: Matches your favorite genre (pop) | Energy match: 0.87/1.00 (song=0.93, target=0.80)
 Superstition Groove - Score: 2.98
-Because: Matches your preferred mood (happy) | Energy match: 0.98/1.00 (song=0.78, target=0.80)
+  Because: Matches your preferred mood (happy) | Energy match: 0.98/1.00 (song=0.78, target=0.80)
+```
 
-Rooftop Lights - Score: 2.96
-Because: Matches your preferred mood (happy) | Energy match: 0.96/1.00 (song=0.76, target=0.80)
+### Chill Lofi
+`genre=lofi, mood=chill, energy=0.4, likes_acoustic=True`
+```
+=== Chill Lofi ===
+Midnight Coding - Score: 6.98
+  Because: Matches your favorite genre (lofi) | Matches your preferred mood (chill) | Energy match: 0.98/1.00 (song=0.42, target=0.40) | Has the acoustic feel you enjoy (acousticness=0.71)
+Library Rain - Score: 6.95
+  Because: Matches your favorite genre (lofi) | Matches your preferred mood (chill) | Energy match: 0.95/1.00 (song=0.35, target=0.40) | Has the acoustic feel you enjoy (acousticness=0.86)
+Focus Flow - Score: 5.00
+  Because: Matches your favorite genre (lofi) | Energy match: 1.00/1.00 (song=0.40, target=0.40) | Has the acoustic feel you enjoy (acousticness=0.78)
+```
 
-Night Drive Loop - Score: 0.95
-Because: Energy match: 0.95/1.00 (song=0.75, target=0.80)
+### Deep Intense Rock
+`genre=rock, mood=intense, energy=0.9, likes_acoustic=False`
+```
+=== Deep Intense Rock ===
+Storm Runner - Score: 5.99
+  Because: Matches your favorite genre (rock) | Matches your preferred mood (intense) | Energy match: 0.99/1.00 (song=0.91, target=0.90)
+Gym Hero - Score: 2.97
+  Because: Matches your preferred mood (intense) | Energy match: 0.97/1.00 (song=0.93, target=0.90)
+Neon Rage - Score: 2.94
+  Because: Matches your preferred mood (intense) | Energy match: 0.94/1.00 (song=0.96, target=0.90)
+```
+
+### Genre Trap — metal+happy (adversarial)
+`genre=metal, mood=happy, energy=0.5`
+```
+=== Genre Trap (metal+happy) ===
+Neon Rage - Score: 3.54
+  Because: Matches your favorite genre (metal) | Energy match: 0.54/1.00 (song=0.96, target=0.50)
+Rooftop Lights - Score: 2.74
+  Because: Matches your preferred mood (happy) | Energy match: 0.74/1.00 (song=0.76, target=0.50)
+Superstition Groove - Score: 2.72
+  Because: Matches your preferred mood (happy) | Energy match: 0.72/1.00 (song=0.78, target=0.50)
+```
+
+### Acoustic Paradox (adversarial)
+`genre=classical, mood=melancholic, energy=0.2, likes_acoustic=True`
+```
+=== Acoustic Paradox ===
+Sonata No. 3 - Score: 6.98
+  Because: Matches your favorite genre (classical) | Matches your preferred mood (melancholic) | Energy match: 0.98/1.00 (song=0.22, target=0.20) | Has the acoustic feel you enjoy (acousticness=0.97)
+Spacewalk Thoughts - Score: 1.92
+  Because: Energy match: 0.92/1.00 (song=0.28, target=0.20) | Has the acoustic feel you enjoy (acousticness=0.92)
+Rainy Porch - Score: 1.87
+  Because: Energy match: 0.87/1.00 (song=0.33, target=0.20) | Has the acoustic feel you enjoy (acousticness=0.88)
+```
+
+### Energy Cliff — mellow pop (adversarial)
+`genre=pop, mood=happy, energy=0.5`
+```
+=== Energy Cliff (mellow pop) ===
+Sunrise City - Score: 5.68
+  Because: Matches your favorite genre (pop) | Matches your preferred mood (happy) | Energy match: 0.68/1.00 (song=0.82, target=0.50)
+Gym Hero - Score: 3.57
+  Because: Matches your favorite genre (pop) | Energy match: 0.57/1.00 (song=0.93, target=0.50)
+Rooftop Lights - Score: 2.74
+  Because: Matches your preferred mood (happy) | Energy match: 0.74/1.00 (song=0.76, target=0.50)
 ```
 
 ## Potential Biases
